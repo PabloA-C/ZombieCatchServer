@@ -18,9 +18,10 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Key key;
 	private String email;
+	private String userName;
 	private String password;
-	private Map<String, Integer> hSkills;
-	private Map<String, Integer> zSkills;
+	private Integer lvlStrong,lvlPerceptive,lvlDeadly,lvlSneaky;
+	
 	private double experience;
 
 
@@ -32,6 +33,14 @@ public class User {
 		return email;
 	}
 
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName= userName;
+	}
+	
 	public void setEmail(String email) {
 		this.email = email;
 	}
@@ -44,21 +53,39 @@ public class User {
 		this.password = password;
 	}
 
-	public Map<String, Integer> getHSkills() {
-		return hSkills;
+	public Integer getlvlStrong() {
+		return lvlStrong;
+	}
+	
+	public void setlvlStrong(Integer lvlStrong) {
+		this.lvlStrong=lvlStrong;
 	}
 
-	public void setHSkills(Map<String, Integer> sHkills) {
-		this.hSkills = hSkills;
+	public Integer getlvlPerceptive() {
+		return lvlPerceptive;
+	}
+	public void setlvlPerceptive(Integer lvlPerceptive) {
+		this.lvlPerceptive = lvlPerceptive;
 	}
 
-	public Map<String, Integer> getZSkills() {
-		return zSkills;
+	
+	public Integer getlvlDeadly() {
+		return lvlDeadly;
+	}
+	
+	public void setlvlDeadly(Integer lvlDeadly) {
+		this.lvlDeadly = lvlDeadly;
 	}
 
-	public void setZSkills(Map<String, Integer> sZkills) {
-		this.zSkills = zSkills;
+
+	public Integer getlvlSneaky() {
+		return lvlSneaky;
 	}
+	
+	public void setlvlSneaky(Integer lvlSneaky) {
+		this.lvlSneaky = lvlSneaky;
+	}
+	
 
 	public double getExperience() {
 		return experience;

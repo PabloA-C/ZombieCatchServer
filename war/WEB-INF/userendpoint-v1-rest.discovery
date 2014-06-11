@@ -1,6 +1,6 @@
 {
  "kind": "discovery#restDescription",
- "etag": "\"p_qcyFV0KQVqSB1Aq3pqmPu-2MY/ztct4wjl1tgPg_qGOxnJkVJLDxY\"",
+ "etag": "\"p_qcyFV0KQVqSB1Aq3pqmPu-2MY/gchf6h2sT9B-oInt4U83NmP375g\"",
  "discoveryVersion": "v1",
  "id": "userendpoint:v1",
  "name": "userendpoint",
@@ -88,10 +88,6 @@
     }
    }
   },
-  "JsonMap": {
-   "id": "JsonMap",
-   "type": "object"
-  },
   "Key": {
    "id": "Key",
    "type": "object",
@@ -131,17 +127,30 @@
      "type": "number",
      "format": "double"
     },
-    "hskills": {
-     "$ref": "JsonMap"
-    },
     "key": {
      "$ref": "Key"
+    },
+    "lvlDeadly": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "lvlPerceptive": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "lvlSneaky": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "lvlStrong": {
+     "type": "integer",
+     "format": "int32"
     },
     "password": {
      "type": "string"
     },
-    "zskills": {
-     "$ref": "JsonMap"
+    "userName": {
+     "type": "string"
     }
    }
   }

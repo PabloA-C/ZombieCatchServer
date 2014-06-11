@@ -138,17 +138,26 @@
           "email" : {
             "type" : "string"
           },
+          "userName" : {
+            "type" : "string"
+          },
           "password" : {
             "type" : "string"
           },
+          "lvlStrong" : {
+            "type" : "integer"
+          },
+          "lvlPerceptive" : {
+            "type" : "integer"
+          },
+          "lvlDeadly" : {
+            "type" : "integer"
+          },
+          "lvlSneaky" : {
+            "type" : "integer"
+          },
           "experience" : {
             "type" : "number"
-          },
-          "hskills" : {
-            "$ref" : "JsonMap"
-          },
-          "zskills" : {
-            "$ref" : "JsonMap"
           }
         }
       },
@@ -179,10 +188,6 @@
             "type" : "string"
           }
         }
-      },
-      "JsonMap" : {
-        "id" : "JsonMap",
-        "type" : "object"
       },
       "CollectionResponse_User" : {
         "id" : "CollectionResponse_User",
