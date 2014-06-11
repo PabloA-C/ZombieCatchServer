@@ -13,12 +13,12 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 import javax.inject.Named;
-import javax.persistence.EntityNotFoundException;
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-@Api(name = "userendpoint", namespace = @ApiNamespace(ownerDomain = "zombiecatch.softhealth", ownerName = "zombiecatch.softhealth", packagePath = ""))
-public class UserEndpoint {
+@Api(name = "gameendpoint", namespace = @ApiNamespace(ownerDomain = "zombiecatch.softhealth", ownerName = "zombiecatch.softhealth", packagePath = ""))
+public class GameEndpoint {
 
 	/**
 	 * This method lists all the entities inserted in datastore.
@@ -28,18 +28,18 @@ public class UserEndpoint {
 	 * persisted and a cursor to the next page.
 	 */
 	@SuppressWarnings({ "unchecked", "unused" })
-	@ApiMethod(name = "listUser")
-	public CollectionResponse<User> listUser(
+	@ApiMethod(name = "listGame")
+	public CollectionResponse<Game> listGame(
 			@Nullable @Named("cursor") String cursorString,
 			@Nullable @Named("limit") Integer limit) {
 
 		EntityManager mgr = null;
 		Cursor cursor = null;
-		List<User> execute = null;
+		List<Game> execute = null;
 
 		try {
 			mgr = getEntityManager();
-			Query query = mgr.createQuery("select from User as User");
+			Query query = mgr.createQuery("select from Game as Game");
 			if (cursorString != null && cursorString != "") {
 				cursor = Cursor.fromWebSafeString(cursorString);
 				query.setHint(JPACursorHelper.CURSOR_HINT, cursor);
@@ -50,20 +50,20 @@ public class UserEndpoint {
 				query.setMaxResults(limit);
 			}
 
-			execute = (List<User>) query.getResultList();
+			execute = (List<Game>) query.getResultList();
 			cursor = JPACursorHelper.getCursor(execute);
 			if (cursor != null)
 				cursorString = cursor.toWebSafeString();
 
 			// Tight loop for fetching all entities from datastore and accomodate
 			// for lazy fetch.
-			for (User obj : execute)
+			for (Game obj : execute)
 				;
 		} finally {
 			mgr.close();
 		}
 
-		return CollectionResponse.<User> builder().setItems(execute)
+		return CollectionResponse.<Game> builder().setItems(execute)
 				.setNextPageToken(cursorString).build();
 	}
 
@@ -73,16 +73,16 @@ public class UserEndpoint {
 	 * @param id the primary key of the java bean.
 	 * @return The entity with primary key id.
 	 */
-	@ApiMethod(name = "getUser")
-	public User getUser(@Named("id") Long id) {
+	@ApiMethod(name = "getGame")
+	public Game getGame(@Named("id") Long id) {
 		EntityManager mgr = getEntityManager();
-		User user = null;
+		Game game = null;
 		try {
-			user = mgr.find(User.class, id);
+			game = mgr.find(Game.class, id);
 		} finally {
 			mgr.close();
 		}
-		return user;
+		return game;
 	}
 
 	/**
@@ -90,18 +90,21 @@ public class UserEndpoint {
 	 * exists in the datastore, an exception is thrown.
 	 * It uses HTTP POST method.
 	 *
-	 * @param user the entity to be inserted.
+	 * @param game the entity to be inserted.
 	 * @return The inserted entity.
 	 */
-	@ApiMethod(name = "insertUser")
-	public User insertUser(User user) {
+	@ApiMethod(name = "insertGame")
+	public Game insertGame(Game game) {
 		EntityManager mgr = getEntityManager();
 		try {
-			mgr.persist(user);
+			if (containsGame(game)) {
+				throw new EntityExistsException("Object already exists");
+			}
+			mgr.persist(game);
 		} finally {
 			mgr.close();
 		}
-		return user;
+		return game;
 	}
 
 	/**
@@ -109,21 +112,18 @@ public class UserEndpoint {
 	 * exist in the datastore, an exception is thrown.
 	 * It uses HTTP PUT method.
 	 *
-	 * @param user the entity to be updated.
+	 * @param game the entity to be updated.
 	 * @return The updated entity.
 	 */
-	@ApiMethod(name = "updateUser")
-	public User updateUser(User user) {
+	@ApiMethod(name = "updateGame")
+	public Game updateGame(Game game) {
 		EntityManager mgr = getEntityManager();
 		try {
-			if (!containsUser(user)) {
-				throw new EntityNotFoundException("Object does not exist");
-			}
-			mgr.persist(user);
+			mgr.persist(game);
 		} finally {
 			mgr.close();
 		}
-		return user;
+		return game;
 	}
 
 	/**
@@ -132,22 +132,22 @@ public class UserEndpoint {
 	 *
 	 * @param id the primary key of the entity to be deleted.
 	 */
-	@ApiMethod(name = "removeUser")
-	public void removeUser(@Named("id") Long id) {
+	@ApiMethod(name = "removeGame")
+	public void removeGame(@Named("id") Long id) {
 		EntityManager mgr = getEntityManager();
 		try {
-			User user = mgr.find(User.class, id);
-			mgr.remove(user);
+			Game game = mgr.find(Game.class, id);
+			mgr.remove(game);
 		} finally {
 			mgr.close();
 		}
 	}
 
-	private boolean containsUser(User user) {
+	private boolean containsGame(Game game) {
 		EntityManager mgr = getEntityManager();
 		boolean contains = true;
 		try {
-			User item = mgr.find(User.class, user.getKey());
+			Game item = mgr.find(Game.class, game.getKey());
 			if (item == null) {
 				contains = false;
 			}

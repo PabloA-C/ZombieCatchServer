@@ -1,9 +1,5 @@
 package softhealth.zombiecatch;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,10 +16,8 @@ public class User {
 	private String email;
 	private String userName;
 	private String password;
-	private Integer lvlStrong,lvlPerceptive,lvlDeadly,lvlSneaky;
-	
+	private Integer lvlStrong, lvlPerceptive, lvlDeadly, lvlSneaky;
 	private double experience;
-
 
 	public Key getKey() {
 		return key;
@@ -38,9 +32,9 @@ public class User {
 	}
 
 	public void setUserName(String userName) {
-		this.userName= userName;
+		this.userName = userName;
 	}
-	
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
@@ -56,43 +50,41 @@ public class User {
 	public Integer getlvlStrong() {
 		return lvlStrong;
 	}
-	
+
 	public void setlvlStrong(Integer lvlStrong) {
-		this.lvlStrong=lvlStrong;
+		this.lvlStrong = lvlStrong;
 	}
 
 	public Integer getlvlPerceptive() {
 		return lvlPerceptive;
 	}
+
 	public void setlvlPerceptive(Integer lvlPerceptive) {
 		this.lvlPerceptive = lvlPerceptive;
 	}
 
-	
 	public Integer getlvlDeadly() {
 		return lvlDeadly;
 	}
-	
+
 	public void setlvlDeadly(Integer lvlDeadly) {
 		this.lvlDeadly = lvlDeadly;
 	}
 
-
 	public Integer getlvlSneaky() {
 		return lvlSneaky;
 	}
-	
+
 	public void setlvlSneaky(Integer lvlSneaky) {
 		this.lvlSneaky = lvlSneaky;
 	}
-	
 
 	public double getExperience() {
 		return experience;
 	}
 
-	public void setExperience(String experience) {
-		this.experience = this.experience;
+	public void setExperience(double experience) {
+		this.experience = experience; 
 	}
 
 }
