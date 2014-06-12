@@ -29,6 +29,11 @@ public class Player {
 		return gameTitle;
 	}
 
+	public void setGameTitle(String gameTitle) {
+		this.gameTitle = gameTitle;
+	}
+
+	
 	public String getUserEmail() {
 		return userEmail;
 	}

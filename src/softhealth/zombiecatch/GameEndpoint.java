@@ -13,7 +13,6 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 import javax.inject.Named;
-import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -97,9 +96,6 @@ public class GameEndpoint {
 	public Game insertGame(Game game) {
 		EntityManager mgr = getEntityManager();
 		try {
-			if (containsGame(game)) {
-				throw new EntityExistsException("Object already exists");
-			}
 			mgr.persist(game);
 		} finally {
 			mgr.close();
